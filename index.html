@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MxstCC Terminal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000000;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+        #terminal {
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .line-1 { color: #888888; }
+        .line-2 { color: #ff3333; }
+        .line-3 { color: #00ff66; }
+    </style>
+</head>
+<body>
+
+    <div id="terminal"></div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        let counter = 1;
+        const maxLimit = 100000;
+
+        function addLines() {
+            if (counter > maxLimit) {
+                clearInterval(timer);
+                return;
+            }
+
+            // Her adımda eklenen satır sayısını düşürüp süreyi uzattık
+            for (let i = 0; i < 3; i++) {
+                if (counter > maxLimit) break;
+                
+                const div = document.createElement('div');
+                const randColorClass = Math.random() > 0.5 ? 'line-2' : 'line-3';
+                
+                div.innerHTML = `<span class="line-1">${counter} - </span><span class="${randColorClass}">MxstCC SAPLAR - MUSTAFA BAYRAK</span>`;
+                terminal.appendChild(div);
+                counter++;
+            }
+
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        // Akış hızını 5 dakikaya yayacak şekilde ayarladık
+        const timer = setInterval(addLines, 80);
+    </script>
+
+</body>
+</html>
